@@ -34,7 +34,7 @@ Try searching by Glottolog id:
 
 http://localhost:8000/v1/lang/pera1256
 
-## API Documentation:
+## API Documentation
 
 Run `uvicorn main:app --reload` and open http://localhost:8000/docs/
 
@@ -58,6 +58,11 @@ Log in to Container:
 docker exec -it -u root fastapi-glottolog-container /bin/bash
 ```
 
+## Roadmap
+
+- Return bibliographical information for languages.
+- CLI for API
+
 ## References
 
 Glottolog: https://glottolog.org/
@@ -68,6 +73,6 @@ FastAPI:  https://fastapi.tiangolo.com/
 
 ## License
 
-Fastapi-glottolog is licensed under MIT License
+Fastapi-glottolog is licensed under the MIT License
 
 The Glottolog data is licensed as CC-BY 4.0: https://creativecommons.org/licenses/by/4.0/
