@@ -2,6 +2,8 @@
 
 REST API for [Glottolog](https://glottolog.org/) using Python Fastapi.
 
+Note: This is a project independent of Glottolog.org.
+
 ## Installation
 
 python3 -m venv venv
