@@ -6,3 +6,5 @@ messages/
 glottolog/
 
 test.py
+
+app/__pycache__

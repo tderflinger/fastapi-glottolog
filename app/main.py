@@ -1,8 +1,19 @@
 from fastapi import FastAPI
+
 from pyglottolog import Glottolog
 from clldutils.clilib import get_parser_and_subparsers
-import uvicorn
-import langsearch
+from pyglottolog import fts
+from pyglottolog.cli_util import register_search
+
+class Args:
+
+    def __init__(self, queryTerm):
+        self.repos = glottolog
+        self.query = queryTerm
+
+def run_search(args):
+    count, results = fts.search_langs(args.repos, args.query)
+    return results
 
 app = FastAPI()
 
@@ -11,22 +22,16 @@ async def startup_event():
     global glottolog
     glottolog = Glottolog('./glottolog')
     parser, subparsers = get_parser_and_subparsers('glottolog')
-    langsearch.register(parser)
+    register_search(parser, 'iso:abd')
 
-class Args:
-
-    def __init__(self, queryTerm):
-        self.repos = glottolog
-        self.query = queryTerm
-
-@app.get("/search/{query}")
+@app.get("/v1/search/{query}")
 async def search_lang(query):
     arg = Args(query)
-    results = langsearch.run(arg)
+    results = run_search(arg)
 
     return results
 
-@app.get("/lang/{langid}")
+@app.get("/v1/lang/{langid}")
 async def read_root(langid):
     lang = glottolog.languoid(langid)
     sources = lang.sources
@@ -68,6 +73,3 @@ async def read_root(langid):
             "iso": lang.iso,
             "iso_code": lang.iso_code,
             "isolate": lang.isolate}
-
-if __name__ == '__main__':
-    uvicorn.run(app, port=8080, host="0.0.0.0")
