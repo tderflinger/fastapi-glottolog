@@ -34,7 +34,7 @@ Try searching by Glottolog id:
 
 http://localhost:8000/v1/lang/pera1256
 
-## API Documentation
+## OpenAPI Documentation
 
 Run `uvicorn main:app --reload` and open http://localhost:8000/docs/
 
@@ -56,6 +56,16 @@ Log in to Container:
 
 ```bash
 docker exec -it -u root fastapi-glottolog-container /bin/bash
+```
+
+Pre-built Image in Docker Hub:
+
+https://hub.docker.com/repository/docker/tderflinger/fastapi-glottolog
+
+Pull Image:
+
+```bash
+docker pull tderflinger/fastapi-glottolog:0.1.0
 ```
 
 ## Roadmap
