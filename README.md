@@ -60,7 +60,7 @@ docker exec -it -u root fastapi-glottolog-container /bin/bash
 
 Pre-built Image in Docker Hub:
 
-https://hub.docker.com/repository/docker/tderflinger/fastapi-glottolog
+https://hub.docker.com/r/tderflinger/fastapi-glottolog
 
 Pull Image:
 
