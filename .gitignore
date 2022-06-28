@@ -8,3 +8,4 @@ glottolog/
 test.py
 
 app/__pycache__
+deployment.txt

@@ -1,9 +1,9 @@
 from fastapi import FastAPI
-
 from pyglottolog import Glottolog
 from clldutils.clilib import get_parser_and_subparsers
 from pyglottolog import fts
 from pyglottolog.cli_util import register_search
+from fastapi.encoders import jsonable_encoder
 
 class Args:
 
@@ -29,7 +29,14 @@ async def search_lang(query):
     arg = Args(query)
     results = run_search(arg)
 
-    return results
+    filtered_results = []
+
+    for result in results:
+        json_result = jsonable_encoder(result)
+        del json_result["fname"]
+        filtered_results.append(json_result)
+
+    return filtered_results
 
 @app.get("/v1/lang/{langid}")
 async def read_root(langid):
@@ -40,9 +47,16 @@ async def read_root(langid):
         del lang.cfg['sources']['glottolog']
         del lang.cfg['sources']
 
+    filtered_family = jsonable_encoder(lang.family)
+    del filtered_family["dir"]
+
+    filtered_parent = jsonable_encoder(lang.parent)
+    del filtered_parent["dir"]
+
 # TODO: Does not work, why? Memory hog, unresponsive:
 #    for src in sources:
 #        src = src.get_source(glottolog)
+#        print(jsonable_encoder(src))
 #        sprint(src.id, color='green')
 #        # sprint(src.text())
 #        print()
@@ -52,11 +66,10 @@ async def read_root(langid):
             "category": lang.category,
             "id": lang.id,
             "glottocode": lang.glottocode,
-            "family": lang.family,
-            "parent": lang.parent,
+            "family": filtered_family,
+            "parent": filtered_parent,
             "ancestors": lang.ancestors,
             "children": lang.children,
-            "path": lang.fname,
             "identifier": lang.identifier,
             "endangerment": lang.endangerment,
             "classification_comment": lang.classification_comment,
