@@ -1,6 +1,6 @@
 # fastapi-glottolog
 
-REST API for [Glottolog](https://glottolog.org/) using Python Fastapi.
+REST API for [Glottolog](https://glottolog.org/) using Python FastAPI.
 
 Note: This is a project independent of Glottolog.org.
 
