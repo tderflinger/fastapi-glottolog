@@ -1,5 +1,7 @@
 # fastapi-glottolog
 
+[![License:MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
 REST API for [Glottolog](https://glottolog.org/) using Python FastAPI.
 
 Note: This is a project independent of Glottolog.org.
